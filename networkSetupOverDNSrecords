@@ -1,0 +1,13 @@
+#!/bin/bash
+NAME=`hostname |cut -d . -f 1`
+ADDRP=`host $NAME 10.111.0.6|grep has|cut -f4 -d" "`
+ADDRX=`host $NAME.md.xsan 10.111.0.6|grep has|cut -f4 -d" "`
+PUB="Ethernet 1"
+MD="Ethernet 2"
+networksetup -setmanual "$PUB" $ADDRP 255.255.252.0 10.111.0.255
+networksetup -setdnsservers "$PUB" 10.111.0.1 10.111.0.6
+networksetup -setsearchdomains "$PUB" postpro
+networksetup -setmanual "$MD" $ADDRX 255.255.255.0
+
+systemsetup -setusingnetworktime on
+systemsetup -setnetworktimeserver "10.111.0.1"
