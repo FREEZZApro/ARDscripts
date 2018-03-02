@@ -1,6 +1,6 @@
 #mkdir /<USER_PATH>/<ADMIN_NAME>
 mv /Users/<ADMIN_NAME> /<USER_PATH>/
-#dscl . -create /Users/<ADMIN_NAME>
+#dscl . -create /Users/<ADMIN_NAME> # clear first remark in this line just only if you don't use the previous line
 dscl . -create /Users/<ADMIN_NAME> RealName "<FULL ADMIN NAME>"
 dscl . -create /Users/<ADMIN_NAME> NFSHomeDirectory /<USER_PATH>/<ADMIN_NAME>
 dscl . -create /Users/<ADMIN_NAME> UserShell /bin/bash
