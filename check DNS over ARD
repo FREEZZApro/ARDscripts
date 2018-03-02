@@ -1,0 +1,12 @@
+# Thank's for vasily.kolosov@shortcut<dot>ru for finding this solution
+#
+# checking forward and backward DNS records through ARD
+#
+
+ethName=$(networksetup -listnetworkserviceorder | grep Ethernet | head -n 1 | sed -e 's/([0-9]) //' );
+mainIP=$(networksetup -getinfo "$ethName" | egrep -e '^IP address:' | awk '{ print $3 }');
+resolvedHostname=$(dig -x $mainIP | grep -A 1 'ANSWER SECTION' | grep PTR | awk '{ print $5 }' | sed -e 's/\.$//g');
+resolvedIP=$(dig $resolvedHostname | grep -A 1 'ANSWER SECTION' | egrep -e 'IN.*A' | awk '{ print $5 }');
+if [ $resolvedIP == $mainIP ];
+then echo "IP addresses match, everything is OK";
+else echo "I have IP $mainIP, but get resolved to $resolvedIP"; fi
