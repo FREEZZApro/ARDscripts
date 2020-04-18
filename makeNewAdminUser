@@ -1,5 +1,5 @@
 #mkdir /<USER_PATH>/<ADMIN_NAME>
-mv /Users/<ADMIN_NAME> /<USER_PATH>/
+mv /Users/<ADMIN_NAME>/<USER_PATH>/
 #dscl . -create /Users/<ADMIN_NAME> # clear first remark in this line just only if you don't use the previous line
 dscl . -create /Users/<ADMIN_NAME> RealName "<FULL ADMIN NAME>"
 dscl . -create /Users/<ADMIN_NAME> NFSHomeDirectory /<USER_PATH>/<ADMIN_NAME>
@@ -8,5 +8,5 @@ dscl . -create /Users/<ADMIN_NAME> UniqueID <ID_NUMBER>
 dscl . -create /Users/<ADMIN_NAME> PrimaryGroupID 20
 dscl . -passwd /Users/<ADMIN_NAME> '<PASSWORD>'
 dscl . -append /Groups/admin GroupMembership <ADMIN_NAME>
-chown -R -f <ADMIN_NAME>:staff /var/<ADMIN_NAME>
+chown -R -f <ADMIN_NAME>:staff /<USER_PATH>/<ADMIN_NAME>
 defaults write /Library/Preferences/com.apple.loginwindow HiddenUsersList -array-add <ADMIN_NAME>
